@@ -1,33 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import CardHome from "./components/cardHome/cardHome"
+import NavBar from "./components/navBar/navBar"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const currentHour = new Date().getHours();
+
+  const greeting = currentHour < 12 ? "Morning" : "Evening";
+
+  const mainCard = (
+    <div className="">
+    <div className="mainCard-left">
+      <div className="text-2xl font-bold">{`Good ${greeting}!`}</div>
+      <div className="">All systems are working well today.</div>
+    </div>
+    </div>
+
+  );
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <NavBar/>
+
+      <div className="px-20 py-10 grid grid-cols-6 grid-rows-2 gap-4">
+        <CardHome className="card-main col-span-4" content={mainCard}/>
+        <CardHome className="card-weather col-span-2"/>
+        <CardHome className=""/>
+        <CardHome className=""/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
