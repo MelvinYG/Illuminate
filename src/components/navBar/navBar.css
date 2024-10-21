@@ -1,0 +1,19 @@
+.profile-btn{
+    position: relative;
+}
+
+.profile-dropdown{
+    position: absolute;
+    top: 110%;
+    width: 100px;
+    height: 100px;
+    right: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: #fcfcfc;
+    box-shadow: 0 0 2px #888;
+}
