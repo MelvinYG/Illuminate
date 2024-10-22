@@ -1,0 +1,13 @@
+@media screen and (min-width: 1250px) {
+    .mainCard{
+        background-image: url(../public/solar-nobg.png);
+        background-size: contain;    /* Ensures the image covers the entire div */
+        background-position: bottom right; /* Center the image */
+        background-repeat: no-repeat;
+    }
+}
+@media screen and (max-width: 1250px) {
+    .mainCard{
+        padding-right: 20px;
+    }
+}
