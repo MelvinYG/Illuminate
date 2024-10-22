@@ -1,8 +1,13 @@
 .card-main{
     height: 35vh;
-    padding: 20px 40px;
+    padding: 20px 0 0 40px;
 }
 
 .card-weather{
     height: 35vh;
+    padding: 20px 30px;
+}
+
+.card{
+    box-shadow: 0 0px 1px #888;
 }
