@@ -17,3 +17,9 @@
     background-color: #fcfcfc;
     box-shadow: 0 0 2px #888;
 }
+
+@media screen and (max-width: 848px) {
+    .navbar-options{
+        display: none !important;
+    }
+}
