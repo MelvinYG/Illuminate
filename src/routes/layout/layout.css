@@ -1,6 +1,6 @@
 .layout{
     height: 100vh;
-    max-width: 80vw;
+    /* max-width: 80vw; */
     margin-left: auto;
     margin-right: auto;
     padding: 0 20px;
@@ -12,7 +12,7 @@
         min-height: calc(100vh - 100px);
     }
 }
-
+/* 
 @media screen and (max-width: 1300px) {
     .layout{
         max-width: 1280px;
@@ -29,4 +29,4 @@
     .layout{
         max-width: 640px;
     }
-}
+} */

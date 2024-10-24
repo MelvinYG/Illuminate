@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 // import axios from "axios";
 import weatherData from "../../lib/sampleWeather.json";
 
-import AcUnitIcon from "@mui/icons-material/AcUnit";
-
 // Utility function to convert UNIX timestamp to readable time
 const convertUnixToTime = (unixTime, timezone) => {
   const date = new Date((unixTime + timezone) * 1000); // Adjust for the location's timezone

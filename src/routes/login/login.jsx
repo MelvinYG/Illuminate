@@ -38,7 +38,7 @@ const Login = () => {
           <input type="password" name='password' placeholder='Password' required />
           {error && <span>{error}</span>}
           <button className='btn'>Login</button>
-          <Link to={'/signup'}>Dont have an account ? Signup</Link>
+          <Link to={'/signup'}>Don't have an account ? <span className="text-[#888] hover:text-blue-600">Signup</span></Link>
         </form>
       </div>
       <HeroImg></HeroImg>
