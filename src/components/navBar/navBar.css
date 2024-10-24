@@ -17,6 +17,12 @@
     background-color: #fcfcfc;
     box-shadow: 0 0 2px #888;
     z-index: 210;
+
+    div{
+        &:hover{
+            cursor: pointer;
+        }
+    }
 }
 
 @media screen and (max-width: 848px) {

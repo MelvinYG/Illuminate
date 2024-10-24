@@ -23,7 +23,7 @@ const DevicesPage = () => {
     console.log("Request started")
 
     try {
-      const response = await apiRequest.post("/api/device", {
+      const response = await apiRequest.post("/device", {
         deviceName,
         wattage: Number(wattage), // Convert wattage to number
         deviceId,
@@ -32,6 +32,7 @@ const DevicesPage = () => {
       console.log("Device added successfully:", response.data);
       // Reset form or provide feedback to user
       resetForm();
+      setAddBtn(el => !el);
     } catch (error) {
       console.error("Error adding device:", error);
     }
