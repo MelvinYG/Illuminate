@@ -42,3 +42,9 @@
         }
     }
 }
+
+@media screen and (max-width: 727px) {
+    .form-container{
+        width: 85%;
+    }
+}

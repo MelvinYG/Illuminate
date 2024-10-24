@@ -8,3 +8,9 @@
         object-fit: contain;
     }
 }
+
+@media screen and (max-width: 727px) {
+    .heroImg-container{
+        display: none;
+    }
+}
