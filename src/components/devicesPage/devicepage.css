@@ -51,9 +51,43 @@
 
 .device-add-details{
     position: absolute;
-    background-color: red;
+    background-color: white;
     width: 70vw;
-    height: 40vh;
-    top: 20%;
+    height: 60vh;
+    top: 10%;
     left: 10%;
+    border: 1px solid #eee;
+    box-shadow: 0 0 1px #888;
+    
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px 20px;
+
+        div{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+    input{
+        outline: none;
+        background-color: #eee;
+        width: 100%;
+        border-radius: 1rem;
+        padding: 5px 10px;
+    }
+    button{
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        background-color: #0047ba;
+        color: #fff;
+        border-radius: 1rem;
+        align-self: center;
+    }
 }
