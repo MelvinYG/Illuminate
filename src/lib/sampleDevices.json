@@ -1,0 +1,69 @@
+[
+    {
+      "deviceName": "LG Washing Machine 7kg",
+      "wattage": 1500,
+      "category": "Washing machine",
+      "quantity": 1
+    },
+    {
+      "deviceName": "Bosch Dishwasher 14 Place",
+      "wattage": 1800,
+      "category": "Dish washer machine",
+      "quantity": 1
+    },
+    {
+      "deviceName": "Philips LED Bulb 9W",
+      "wattage": 9,
+      "category": "Bulb",
+      "quantity": 6
+    },
+    {
+      "deviceName": "Daikin Split AC 1.5 Ton",
+      "wattage": 1700,
+      "category": "AC",
+      "quantity": 2
+    },
+    {
+      "deviceName": "Havells Ceiling Fan 75W",
+      "wattage": 75,
+      "category": "Ceiling fans",
+      "quantity": 4
+    },
+    {
+      "deviceName": "Luminous Submersible Water Pump 1HP",
+      "wattage": 750,
+      "category": "Pump",
+      "quantity": 1
+    },
+    {
+      "deviceName": "Sony Bravia 43 inch LED TV",
+      "wattage": 120,
+      "category": "TV",
+      "quantity": 1
+    },
+    {
+      "deviceName": "Prestige Mixer Grinder 750W",
+      "wattage": 750,
+      "category": "Mixer grinder",
+      "quantity": 1
+    },
+    {
+      "deviceName": "Luminous Inverter 900VA",
+      "wattage": 720,
+      "category": "Inverter",
+      "quantity": 1
+    },
+    {
+      "deviceName": "Luminous Solar Panel 150W",
+      "wattage": 150,
+      "category": "Solar panel",
+      "quantity": 2
+    },
+    {
+      "deviceName": "Luminous Battery 150Ah",
+      "wattage": 150,
+      "category": "Battery",
+      "quantity": 2
+    }
+  ]
+  

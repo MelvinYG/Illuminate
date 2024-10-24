@@ -1,0 +1,93 @@
+.add-btn{
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    background-color: #0047ba;
+    color: #fff;
+    border-radius: 1rem;
+    align-self: flex-end;
+}
+
+.device-page{
+    position: relative;
+}
+
+.device-row{
+    border: 1px solid #eee;
+    padding: 20px 15px;
+}
+
+.device-details{
+    display: flex;
+    width: 70%;
+    gap: 20px;
+}
+
+.device-edit{
+    cursor: pointer;
+    position: relative;
+}
+
+.device-quantity{
+    color: #888;
+}
+
+.device-edit-options{
+    border: 1px solid #eee;
+    position: absolute;
+    padding: 10px 15px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 200;
+
+    .edit{
+        border-bottom: 1px solid #eee;
+    }
+}
+
+.device-add-details{
+    position: absolute;
+    background-color: white;
+    width: 70vw;
+    height: 60vh;
+    top: 10%;
+    left: 10%;
+    border: 1px solid #eee;
+    box-shadow: 0 0 1px #888;
+    
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 40px 20px;
+
+        div{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+    input{
+        outline: none;
+        background-color: #eee;
+        width: 100%;
+        border-radius: 1rem;
+        padding: 5px 10px;
+    }
+    button{
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        background-color: #0047ba;
+        color: #fff;
+        border-radius: 1rem;
+        align-self: center;
+    }
+}
