@@ -4,30 +4,21 @@ import './layout.css';
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
-function Layout(){
+function Layout({ children }) {
   return (
     <div className='layout'>
-        <Navbar></Navbar>
+      <Navbar /> 
       <div className="content">
-        <Outlet></Outlet>
+        {children || <Outlet />} 
       </div>
     </div>
-  )
+  );
 }
 
 function RequiredAuth() {
-  const {currentUser} = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
-  return (
-    (!currentUser) ? 
-    <Navigate to={'/login'}></Navigate> :
-    <div className='layout'>
-        <Navbar></Navbar>
-      <div className="content">
-        <Outlet></Outlet>
-      </div>
-    </div>
-  )
+  return currentUser ? <Outlet /> : <Navigate to="/login" />;
 }
 
-export  { Layout, RequiredAuth };
+export { Layout, RequiredAuth };
