@@ -21,8 +21,8 @@ const NavBar = () => {
                 <img src="./menu.svg" alt="menu" />
                 <img src="./profile.png" alt="" />
                 {profileBtn ? <div className="profile-dropdown">
-                    <div className="profile">Profile</div>
-                    <div className="settings">Settings</div>
+                    <div className="profile"><a href="/profile">Profile</a></div>
+                    <div className="settings"><a href="/settings">Settings</a></div>
                 </div> : <></>}
             </div>
         </div>

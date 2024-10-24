@@ -1,0 +1,40 @@
+.profile-page{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileImg-container{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #999;
+    border-radius: 50%;
+
+    img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+
+.greet{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #888;
+}
+
+.logout{
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 10px;
+        background-color: #0047ba;
+        color: #fff;
+        border-radius: 1rem;
+        align-self: end;
+}
