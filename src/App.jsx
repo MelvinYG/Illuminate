@@ -7,6 +7,8 @@ import Login from "./routes/login/login";
 import Signup from "./routes/signup/signup";
 import ProfilePage from "./routes/profilePage/profilePage";
 import { profilePageLoader } from "./lib/loaders";
+import AnalyticsPage from "./routes/analyticsPage/analyticsPage";
+import SettingsPage from "./routes/settingsPage/settingsPage";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -40,6 +42,14 @@ const App = () => {
           path: "/profile",
           element: <Layout><ProfilePage /> </Layout>,
           loader: profilePageLoader
+        },
+        {
+          path: "/analytics",
+          element: <Layout><AnalyticsPage /></Layout>
+        },
+        {
+          path: "/settings",
+          element: <Layout><SettingsPage /></Layout>
         },
         // Redirect root to home after login
         {
