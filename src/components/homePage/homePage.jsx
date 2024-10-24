@@ -1,5 +1,6 @@
 import CardHome from "../cardHome/cardHome";
 import EnergyDoughnutChart from "../chart/doughnutChart";
+import TariffHome from "../tariffChart/tariffHome";
 import WeatherForecast from "../weatherForecast/weatherForecast";
 
 const HomePage = () => {
@@ -28,7 +29,7 @@ const HomePage = () => {
           className="card-weather col-span-2"
           content={WeatherForecast()}
         />
-        <CardHome className="col-span-2" />
+        <CardHome className="col-span-2 hover:cursor-pointer" content={TariffHome()}/>
         <CardHome className="col-span-4" />
       </div>
     </div>
