@@ -1,0 +1,32 @@
+.layout{
+    height: 100vh;
+    max-width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+
+    .content{
+        /* flex: 1; */
+        min-height: calc(100vh - 100px);
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .layout{
+        max-width: 1280px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .layout{
+        max-width: 769px;
+    }
+}
+
+@media screen and (max-width: 800) {
+    .layout{
+        max-width: 640px;
+    }
+}
