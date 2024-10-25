@@ -6,11 +6,12 @@ import { Layout, RequiredAuth } from "./routes/layout/layout";
 import Login from "./routes/login/login";
 import Signup from "./routes/signup/signup";
 import ProfilePage from "./routes/profilePage/profilePage";
-import { profilePageLoader } from "./lib/loaders";
+import { devicePageLoader, profilePageLoader } from "./lib/loaders";
 import AnalyticsPage from "./routes/analyticsPage/analyticsPage";
 import SettingsPage from "./routes/settingsPage/settingsPage";
 import Loader from "./components/loaderComponent/loaderCompo";
 import { useState } from "react";
+import NotificationsPage from "./routes/notificationsPage/notificationsPage";
 
 const App = () => {
   const [loadingComplete, setLoadingComplete] = useState(false);
@@ -45,7 +46,8 @@ const App = () => {
         },
         {
           path: "/devices",
-          element: <Layout><DevicesPage /></Layout> // Devices page is protected and wrapped with layout
+          element: <Layout><DevicesPage /></Layout> ,// Devices page is protected and wrapped with layout
+          loader: devicePageLoader
         },
         {
           path: "/profile",
@@ -59,6 +61,10 @@ const App = () => {
         {
           path: "/settings",
           element: <Layout><SettingsPage /></Layout>
+        },
+        {
+          path: "/notifications",
+          element: <Layout><NotificationsPage /></Layout>
         },
         // Redirect root to home after login
         {

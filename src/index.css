@@ -36,3 +36,7 @@
     background-color: #121212;
     border-bottom: 1px solid #888;
 }
+
+.dark .device-add-details{
+    color: black;
+}

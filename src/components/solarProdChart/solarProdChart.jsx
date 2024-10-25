@@ -25,7 +25,6 @@ const SolarProdChart = () => {
       };
     });
   };
-  console.log("Solar data", jsonData[0]);
 
   // Filter the data based on the selected time range
   const filterData = (data) => {
@@ -43,7 +42,6 @@ const SolarProdChart = () => {
     //   filtered = data.filter((item) => item.date >= oneMonthAgo);
     // }
     filtered = data.filter((item) => item.date >= new Date("Sun Oct 13 2024 00:00:00 GMT+0530 (India Standard Time)"));
-    console.log(filtered);
 
     return filtered;
   };

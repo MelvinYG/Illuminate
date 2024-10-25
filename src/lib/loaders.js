@@ -16,3 +16,8 @@ export const profilePageLoader = async () => {
     const res = await apiRequest("/user/");
     return res.data;
 };
+
+export const devicePageLoader = async () => {
+    const res = await apiRequest.get("/device");
+    return res.data;
+}
