@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiRequest = axios.create({
-    baseURL: "http://localhost:8080/api/",
+    baseURL: "https://illuminate-backend.onrender.com/api/",
     withCredentials: true
 });
 
