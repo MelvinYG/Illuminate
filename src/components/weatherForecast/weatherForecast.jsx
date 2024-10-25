@@ -4,7 +4,7 @@ import weatherData from "../../lib/sampleWeather.json";
 
 // Utility function to convert UNIX timestamp to readable time
 const convertUnixToTime = (unixTime, timezone) => {
-  const date = new Date((unixTime + timezone) * 1000); // Adjust for the location's timezone
+  const date = new Date((unixTime) * 1000); // Adjust for the location's timezone (location time is already given here)
   return date.toLocaleTimeString("en-IN", {
     hour: "2-digit",
     minute: "2-digit",
