@@ -1,5 +1,6 @@
 import CardHome from "../cardHome/cardHome";
 import EnergyDoughnutChart from "../chart/doughnutChart";
+import Recommendation from "../recommendations/recommendations";
 import TariffHome from "../tariffChart/tariffHome";
 import WeatherForecast from "../weatherForecast/weatherForecast";
 import './homePage.css';
@@ -48,7 +49,7 @@ const HomePage = () => {
         />
 
         {/* Empty Card to maintain the layout */}
-        <CardHome className="col-span-6 md:col-span-6 lg:col-span-4" />
+        <CardHome className="col-span-6 md:col-span-6 lg:col-span-4" content={Recommendation()} />
       </div>
     </div>
   );

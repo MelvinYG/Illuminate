@@ -1,0 +1,29 @@
+.recommendation-card{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 20px;
+    gap: 20px;
+
+    h2{
+        font-weight: bold;
+    }
+}
+
+.recomm{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.recom-box{
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    width: 200px;
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 1rem;
+    cursor: pointer;
+}
