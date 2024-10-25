@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #root{
+/* #root.active{
     background-color: #121212;
     color: #fff;
 
@@ -10,3 +10,16 @@
         color: black;
     }
 } */
+
+/* #root{
+    min-height: 100vh;
+} */
+
+.dark {
+    background-color: #121212;
+    color: #fff;
+}
+
+.dark input {
+    color: #000;
+}
