@@ -50,7 +50,7 @@ const DevicesPage = () => {
   };
 
   return (
-    <div className="mx-20 py-4 flex flex-col gap-8 device-page">
+    <div className="mx-20 py-16 flex flex-col gap-8 device-page">
       <div className="add-btn">
         <button onClick={handleAddButtonClick}>
           {addBtn ? "Cancel" : "Add Device"}

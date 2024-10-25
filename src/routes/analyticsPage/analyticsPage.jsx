@@ -3,7 +3,7 @@ import TariffGraph from "../../components/tariffChart/tariffChart"
 
 const AnalyticsPage = () => {
   return (
-    <div className="flex flex-col gap-36 px-4 pb-64">
+    <div className="flex flex-col gap-36 px-4 pt-16 pb-64">
         <TariffGraph/>
         <SolarProdChart/>    
     </div>

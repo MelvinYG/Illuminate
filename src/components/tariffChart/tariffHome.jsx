@@ -27,13 +27,12 @@ const TariffHome = () => {
       };
     });
   };
-  console.log(jsonData[0]);
 
   // Filter the data based on the selected time range
   const filterData = (data) => {
     // const now = new Date();
     let filtered = data.filter((item) => item.date >= new Date("Sun Oct 20 2024 00:00:00 GMT+0530 (India Standard Time)"));
-    console.log(filtered);
+    // console.log(filtered);
 
     return filtered;
   };

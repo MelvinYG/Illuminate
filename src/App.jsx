@@ -9,8 +9,17 @@ import ProfilePage from "./routes/profilePage/profilePage";
 import { profilePageLoader } from "./lib/loaders";
 import AnalyticsPage from "./routes/analyticsPage/analyticsPage";
 import SettingsPage from "./routes/settingsPage/settingsPage";
+import Loader from "./components/loaderComponent/loaderCompo";
+import { useState } from "react";
 
 const App = () => {
+  const [loadingComplete, setLoadingComplete] = useState(false);
+
+  // Handler to stop displaying the loader
+  const handleLoaderComplete = () => {
+    setLoadingComplete(true);
+  };
+
   const router = createBrowserRouter([
     // Unprotected routes (Login and Signup)
     {
@@ -62,7 +71,8 @@ const App = () => {
 
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      {!loadingComplete && <Loader onComplete={handleLoaderComplete} />}
+      {loadingComplete && <RouterProvider router={router}></RouterProvider>}
     </>
   )
 }
