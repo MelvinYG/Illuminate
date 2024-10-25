@@ -13,11 +13,15 @@ import apiRequest from "./apiRequest";
 // };
 
 export const profilePageLoader = async () => {
-    const res = await apiRequest("/user/");
+    const res = await apiRequest("/user/", {
+        withCredentials: true 
+    });
     return res.data;
 };
 
 export const devicePageLoader = async () => {
-    const res = await apiRequest.get("/device");
+    const res = await apiRequest.get("/device", {
+        withCredentials: true  
+    });
     return res.data;
 }
