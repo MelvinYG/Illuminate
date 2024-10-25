@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 
 export const AuthContext = createContext();
 
-const socket = io('http://localhost:3001');
+const socket = io('https://illuminate-backend.onrender.com');
 
 export const AuthContextProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(
