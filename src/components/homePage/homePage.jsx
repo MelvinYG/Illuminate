@@ -23,30 +23,34 @@ const HomePage = () => {
     </div>
   );
   return (
-    <>
-      <div className="px-4 py-10 grid grid-cols-1 gap-4">
+    <div className="px-4 py-10 md:px-16">
         <div className="mobileGreetings">
           <div className="text-2xl font-bold">{`Good ${greeting}!`}</div>
           <div className="flex flex-col items-start">
             All systems are working well today.
           </div>
         </div>
+      <div className="px-4 py-10 grid grid-cols-6 gap-4 md:px-16">
+
         {/* Main Card spans all columns on mobile and adjusts on larger screens */}
-        <CardHome className="card-main col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-4" content={mainCard} />
-        
+        <CardHome className="card-main col-span-6 lg:col-span-4" content={mainCard} />
+
         {/* Weather Card spans 2 columns on small and larger screens */}
         <CardHome
-            className="card-weather col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2"
-            content={WeatherForecast()}
+          className="card-weather col-span-6  md:col-span-3 lg:col-span-2"
+          content={WeatherForecast()}
         />
-        
+
         {/* Tariff Card spans 2 columns on small and larger screens */}
-        <CardHome className="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 hover:cursor-pointer" content={TariffHome()} />
-        
+        <CardHome 
+          className="col-span-6 md:col-span-3 lg:col-span-2 hover:cursor-pointer" 
+          content={TariffHome()} 
+        />
+
         {/* Empty Card to maintain the layout */}
-        <CardHome className="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-4" />
+        <CardHome className="col-span-6 md:col-span-6 lg:col-span-4" />
       </div>
-    </>
+    </div>
   );
 };
 

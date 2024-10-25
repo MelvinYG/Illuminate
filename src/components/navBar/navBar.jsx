@@ -10,7 +10,6 @@ const NavBar = () => {
 const openSideMenu = () => {
     setSideMenu(prevState => {
         let sideDiv = document.querySelector('.slider-menu');
-        console.log("clicked", !prevState); // This will log the toggled state
         
         if (!prevState) {
             sideDiv.classList.add('active'); // If prevState is false, it means we are opening the menu

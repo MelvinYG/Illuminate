@@ -1,11 +1,13 @@
 import { useState } from "react";
-import sampleDevices from "../../lib/sampleDevices.json";
 import "./devicepage.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import apiRequest from "../../lib/apiRequest";
+import { useLoaderData } from "react-router-dom";
 
 const DevicesPage = () => {
-  const deviceData = sampleDevices;
+  const initialDeviceData = useLoaderData();
+  const [deviceData, setDeviceData] = useState(initialDeviceData); // Store device data in local state
+  const [editVert, setEditVert] = useState(null);
   const [editActive, setEditActive] = useState(null);
   const [deviceName, setDeviceName] = useState("");
   const [wattage, setWattage] = useState("");
@@ -15,26 +17,61 @@ const DevicesPage = () => {
 
   const toggleEdit = (index) => {
     setEditActive((prevIndex) => (prevIndex === index ? null : index));
+    if (index !== null) {
+      // Populate form fields with existing device data for editing
+      const deviceToEdit = deviceData[index];
+      setDeviceName(deviceToEdit.deviceName);
+      setWattage(deviceToEdit.wattage);
+      setDeviceId(deviceToEdit.deviceId);
+      setCategory(deviceToEdit.category);
+    }
+  };
+
+  const toggleVerticalDots = (index) => {
+    setEditVert((prevInd) => (prevInd === index ? null : index));
   };
 
   // Form submit and reset
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Request started")
+    console.log("Request started");
 
     try {
-      const response = await apiRequest.post("/device", {
-        deviceName,
-        wattage: Number(wattage), // Convert wattage to number
-        deviceId,
-        category,
-      });
-      console.log("Device added successfully:", response.data);
+      if (editActive !== null) {
+        // Edit existing device
+        const response = await apiRequest.put(`/device/${deviceData[editActive]._id}`, {
+          deviceName,
+          wattage: Number(wattage), // Convert wattage to number
+          deviceId,
+          category,
+        });
+        console.log("Device updated successfully:", response.data);
+
+        // Update local state with edited device data
+        setDeviceData((prevDevices) =>
+          prevDevices.map((device, index) =>
+            index === editActive ? { ...device, ...response.data } : device
+          )
+        );
+      } else {
+        // Add new device
+        const response = await apiRequest.post("/device", {
+          deviceName,
+          wattage: Number(wattage), // Convert wattage to number
+          deviceId,
+          category,
+        });
+        console.log("Device added successfully:", response.data);
+
+        // Update local state with new device data
+        setDeviceData((prevDevices) => [...prevDevices, response.data]);
+      }
+
       // Reset form or provide feedback to user
       resetForm();
-      setAddBtn(el => !el);
+      setAddBtn(false); // Close add form if it was open
     } catch (error) {
-      console.error("Error adding device:", error);
+      console.error("Error adding/updating device:", error);
     }
   };
 
@@ -43,9 +80,11 @@ const DevicesPage = () => {
     setWattage("");
     setDeviceId("");
     setCategory("");
+    setEditActive(null); // Reset edit state
   };
 
   const handleAddButtonClick = () => {
+    resetForm(); // Reset the form when adding a new device
     setAddBtn((prevAddBtn) => !prevAddBtn);
   };
 
@@ -69,18 +108,15 @@ const DevicesPage = () => {
                   <div className="device-wattage">
                     Wattage: {data.wattage} W
                   </div>
-                  <div className="device-quantity">
-                    Quantity: {data.quantity}
-                  </div>
                 </div>
                 <div className="device-edit">
                   <MoreVertIcon
-                    onClick={() => toggleEdit(index)}
+                    onClick={() => toggleVerticalDots(index)}
                     className="cursor-pointer"
                   />
-                  {editActive === index && (
+                  {editVert === index && (
                     <div className="device-edit-options">
-                      <div className="edit">Edit</div>
+                      <div className="edit" onClick={() => toggleEdit(index)}>Edit</div>
                       <div className="delete">Delete</div>
                     </div>
                   )}
@@ -91,7 +127,7 @@ const DevicesPage = () => {
         )}
       </div>
 
-      {addBtn && (
+      {(addBtn || editActive !== null) && (
         <div className="device-add-details">
           <form onSubmit={handleSubmit}>
             <div>
@@ -139,7 +175,7 @@ const DevicesPage = () => {
                 <option value="Mixer grinder">Mixer grinder</option>
               </select>
             </div>
-            <button type="submit">Add Device</button>
+            <button type="submit">{editActive !== null ? "Edit Device" : "Add Device"}</button>
           </form>
         </div>
       )}

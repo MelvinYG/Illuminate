@@ -11,3 +11,12 @@
         padding-right: 20px;
     }
 }
+
+@media screen and (min-width: 935px) and (max-width: 1023px) {
+    .mainCard{
+        background-image: url(../public/solar-nobg.png);
+        background-size: contain;    /* Ensures the image covers the entire div */
+        background-position: bottom right; /* Center the image */
+        background-repeat: no-repeat;
+    }
+}
