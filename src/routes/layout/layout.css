@@ -8,6 +8,7 @@
     flex-direction: column;
 
     .content{
+        padding-top: 80px;
         /* display: flex; */
         min-height: calc(100vh - 100px);
     }

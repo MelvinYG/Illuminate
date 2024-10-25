@@ -1,0 +1,24 @@
+.mobileGreetings{
+    display: none;
+}
+
+.mainCard{
+    height: 90%;
+}
+
+@media screen and (max-width: 500px) {
+    .mainCard-left{
+        display: none;
+    }
+    .mainCard-right{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .mainCard{
+        justify-content: center;
+    }
+    .mobileGreetings{
+        display: block;
+    }
+}

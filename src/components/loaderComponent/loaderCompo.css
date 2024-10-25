@@ -1,0 +1,44 @@
+.loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #fff; /* Set a background color for the loader screen */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999; /* Keep the loader on top of the page */
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  
+  .loader-logo {
+    width: 150px;
+    height: 150px;
+    animation: zoomIn 2s forwards; /* Apply the zoom-in animation */
+  }
+  
+  /* Animation to zoom in the logo */
+  @keyframes zoomIn {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+  
+  /* When the loader is done, fade it out */
+  .loader-wrapper.loaded {
+    opacity: 0;
+    pointer-events: none; /* Prevent interaction with the loader after it's gone */
+    visibility: hidden;
+    transition: visibility 0s 0.5s, opacity 0.5s ease;
+  }
+  

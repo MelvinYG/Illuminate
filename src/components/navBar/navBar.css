@@ -25,8 +25,49 @@
     }
 }
 
-@media screen and (max-width: 848px) {
+.menuBtn-small-screen{
+    display: none;
+}
+
+@media screen and (max-width: 880px) {
     .navbar-options{
         display: none !important;
     }
+    .menuBtn-small-screen{
+        display: block;
+    }
+}
+
+.slider-menu{
+    height: 100vh;
+    position: absolute;
+    width: 50vw;
+    top:0;
+    right: -50vw;
+    z-index: 999;
+    padding: 50px 30px; 
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    transition: all 0.5s;
+
+    .closeBtn{
+        align-self: flex-end;
+    }
+
+    &.active{
+        right: 0;
+    }
+}
+
+.navbar-main-desktop{
+    border-bottom: 1px solid #eee;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 998;
 }
