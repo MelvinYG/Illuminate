@@ -20,7 +20,7 @@ export const profilePageLoader = async () => {
 };
 
 export const devicePageLoader = async () => {
-    const res = await apiRequest.get("/device", {
+    const res = await apiRequest.get("/device/", {
         withCredentials: true  
     });
     return res.data;
