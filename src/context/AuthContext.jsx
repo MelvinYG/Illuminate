@@ -10,11 +10,12 @@ export const AuthContextProvider = ({ children }) => {
         JSON.parse(localStorage.getItem("user")) || null
     );
     
-    // Initialize darkMode state based on localStorage
+    // Initialize darkMode state based on localStorage (def black)
     const [darkMode, setDarkMode] = useState(() => {
-        return localStorage.getItem("darkMode") === "true";
+        const storedValue = localStorage.getItem("darkMode");
+        return storedValue === null ? true : storedValue === "true";
     });
-
+    
     const updateUser = (data) => {
         setCurrentUser(data);
     };

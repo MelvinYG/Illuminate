@@ -6,13 +6,12 @@ import { AuthContext } from '../../context/AuthContext';
 
 const ProfilePage = () => {
   const profileData = useLoaderData();
-  console.log(profileData);
   const navigate = useNavigate();
   const {logout} = useContext(AuthContext);
 
   const logoutHandler = async () => {
     const res = await apiRequest.post('/auth/logout');
-    console.log(res);
+    // console.log(res);
     logout();
     navigate('/login');
   }
