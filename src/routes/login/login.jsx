@@ -22,10 +22,10 @@ const Login = () => {
       const res = await apiRequest.post("/auth/login", {
         email, password
       });
-      updateUser(res.data);
+      updateUser(res.data.user);
       navigate('/');
     } catch (err) {
-      setError(err.response.data.message);
+      setError(err.response?.data?.message || "Unable to log in");
     }
   }
 
@@ -38,7 +38,7 @@ const Login = () => {
           <input type="password" name='password' placeholder='Password' required />
           {error && <span>{error}</span>}
           <button className='btn'>Login</button>
-          <Link to={'/signup'}>Don't have an account ? <span className="text-[#888] hover:text-blue-600">Signup</span></Link>
+          <Link to={'/signup'}>Don&apos;t have an account ? <span className="text-[#888] hover:text-blue-600">Signup</span></Link>
         </form>
       </div>
       <HeroImg></HeroImg>

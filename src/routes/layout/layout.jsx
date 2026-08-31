@@ -3,6 +3,7 @@ import Navbar from "../../components/navBar/navBar";
 import './layout.css';
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import PropTypes from "prop-types";
 
 function Layout({ children }) {
   return (
@@ -16,9 +17,18 @@ function Layout({ children }) {
 }
 
 function RequiredAuth() {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, authLoading } = useContext(AuthContext);
 
+  if (authLoading) return <div>Checking session…</div>;
   return currentUser ? <Outlet /> : <Navigate to="/login" />;
 }
+
+Layout.propTypes = {
+  children: PropTypes.node,
+};
+
+Layout.defaultProps = {
+  children: null,
+};
 
 export { Layout, RequiredAuth };

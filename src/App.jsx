@@ -12,6 +12,44 @@ import SettingsPage from "./routes/settingsPage/settingsPage";
 import Loader from "./components/loaderComponent/loaderCompo";
 import { useState } from "react";
 import NotificationsPage from "./routes/notificationsPage/notificationsPage";
+import NotificationDetailPage from "./routes/notificationsPage/notificationDetailPage";
+import RouteTelemetry from "./components/routeTelemetry/routeTelemetry";
+
+const router = createBrowserRouter([
+  {
+    element: <RouteTelemetry />,
+    children: [
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> },
+      {
+        path: "/",
+        element: <RequiredAuth />,
+        children: [
+          { index: true, element: <Navigate to="/home" replace /> },
+          { path: "/home", element: <Layout><HomePage /></Layout> },
+          {
+            path: "/devices",
+            element: <Layout><DevicesPage /></Layout>,
+            loader: devicePageLoader,
+          },
+          {
+            path: "/profile",
+            element: <Layout><ProfilePage /></Layout>,
+            loader: profilePageLoader,
+          },
+          { path: "/analytics", element: <Layout><AnalyticsPage /></Layout> },
+          { path: "/settings", element: <Layout><SettingsPage /></Layout> },
+          { path: "/notifications", element: <Layout><NotificationsPage /></Layout> },
+          {
+            path: "/notifications/:notificationId",
+            element: <Layout><NotificationDetailPage /></Layout>,
+          },
+        ],
+      },
+      { path: "*", element: <Navigate to="/home" replace /> },
+    ],
+  },
+]);
 
 const App = () => {
   const [loadingComplete, setLoadingComplete] = useState(false);
@@ -20,60 +58,6 @@ const App = () => {
   const handleLoaderComplete = () => {
     setLoadingComplete(true);
   };
-
-  const router = createBrowserRouter([
-    // Unprotected routes (Login and Signup)
-    {
-      path: "/login",
-      element: <Login />
-    },
-    {
-      path: "/signup",
-      element: <Signup />
-    },
-    {
-      path: "*", // Catch-all for undefined routes
-      element: <Login />
-    },
-    // Protected routes (after login)
-    {
-      path: "/",
-      element: <RequiredAuth />, // Protect routes with authentication
-      children: [
-        {
-          path: "/home",
-          element: <Layout><HomePage /></Layout> // Apply layout only after login
-        },
-        {
-          path: "/devices",
-          element: <Layout><DevicesPage /></Layout> ,// Devices page is protected and wrapped with layout
-          loader: devicePageLoader
-        },
-        {
-          path: "/profile",
-          element: <Layout><ProfilePage /> </Layout>,
-          loader: profilePageLoader
-        },
-        {
-          path: "/analytics",
-          element: <Layout><AnalyticsPage /></Layout>
-        },
-        {
-          path: "/settings",
-          element: <Layout><SettingsPage /></Layout>
-        },
-        {
-          path: "/notifications",
-          element: <Layout><NotificationsPage /></Layout>
-        },
-        // Redirect root to home after login
-        {
-          path: "/",
-          element: <Navigate to="/home" />
-        }
-      ]
-    }
-  ]);
 
   return (
     <>

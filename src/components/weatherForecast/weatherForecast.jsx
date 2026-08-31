@@ -1,120 +1,140 @@
 import { useEffect, useState } from "react";
-// import axios from "axios";
-import weatherData from "../../lib/sampleWeather.json";
+import apiRequest from "../../lib/apiRequest";
+import {
+  DEFAULT_WEATHER_LOCATION,
+  describeGeolocationError,
+  fetchCurrentWeather,
+  getCurrentCoordinates,
+} from "../../lib/weatherService";
 
-// Utility function to convert UNIX timestamp to readable time
-const convertUnixToTime = (unixTime, timezone) => {
-  const date = new Date((unixTime) * 1000); // Adjust for the location's timezone (location time is already given here)
-  return date.toLocaleTimeString("en-IN", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-};
-
-const WeatherIcons = {
-  sunny: "☀️",
-  cloudy: "☁️",
-  partiallyCloudy: "⛅",
-  rainy: "🌧️",
-  thunderstorm: "⛈️",
-  snow: "❄️",
-};
-
-const WeatherIcon = ({ condition }) => {
-  switch (condition) {
-    case "Clear":
-      return <span>{WeatherIcons.sunny}</span>;
-    case "Clouds":
-      return <span>{WeatherIcons.cloudy}</span>;
-    case "Partly Cloudy":
-      return <span>{WeatherIcons.partiallyCloudy}</span>;
-    case "Rain":
-      return <span>{WeatherIcons.rainy}</span>;
-    case "Thunderstorm":
-      return <span>{WeatherIcons.thunderstorm}</span>;
-    case "Snow":
-      return <span>{WeatherIcons.snow}</span>;
-    default:
-      return <span>🌡️</span>; // Default icon for unknown weather
-  }
+const validSavedLocation = (settings) => {
+  const latitude = Number(settings?.latitude);
+  const longitude = Number(settings?.longitude);
+  if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return null;
+  return {
+    latitude,
+    longitude,
+    label: settings.location || "Saved location",
+    source: "settings",
+  };
 };
 
 const WeatherForecast = () => {
   const [weather, setWeather] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(true);
-  //   const apikey = "7241807c6eab85d2733659ad558ee3b4";
+  const [retryVersion, setRetryVersion] = useState(0);
 
   useEffect(() => {
-    // Fetch current location using geolocation API
-    const fetchLocationWeather = async (lat, lon) => {
+    let active = true;
+    const controller = new AbortController();
+
+    const loadWeather = async () => {
+      setLoading(true);
+      setError("");
+      setNotice("");
+
+      const settingsPromise = apiRequest
+        .get("/settings", { signal: controller.signal })
+        .then(({ data }) => validSavedLocation(data))
+        .catch(() => null);
+
+      let browserLocation = null;
+      let geolocationError = null;
       try {
-        // const response = await axios.get(
-        //   `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`
-        // );
-        const response = weatherData;
-        // setWeather(response.data);
-        setWeather(response);
-        setLoading(false);
-        // console.log(response.data);
-      } catch (error) {
-        setError("Failed to fetch weather data");
-        setLoading(false);
+        browserLocation = await getCurrentCoordinates();
+      } catch (locationError) {
+        geolocationError = locationError;
       }
-    };
 
-    // Geolocation API: Request current location
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            fetchLocationWeather(latitude, longitude);
-          },
-          (error) => {
-            setError("Geolocation access denied");
-            setLoading(false);
+      const savedLocation = await settingsPromise;
+      const candidates = [browserLocation, savedLocation, DEFAULT_WEATHER_LOCATION]
+        .filter(Boolean)
+        .filter((candidate, index, locations) => locations.findIndex((location) => (
+          location.latitude === candidate.latitude &&
+          location.longitude === candidate.longitude
+        )) === index);
+
+      let weatherError = null;
+      for (const candidate of candidates) {
+        try {
+          const currentWeather = await fetchCurrentWeather(candidate, {
+            signal: controller.signal,
+          });
+          if (!active) return;
+          setWeather({ ...currentWeather, location: candidate.label });
+
+          if (candidate.source !== "browser") {
+            const locationMessage = geolocationError
+              ? describeGeolocationError(geolocationError)
+              : "Weather for the current coordinates was unavailable.";
+            setNotice(`${locationMessage} Showing ${candidate.label}.`);
           }
-        );
-      } else {
-        setError("Geolocation is not supported by this browser.");
-        setLoading(false);
+          setLoading(false);
+          return;
+        } catch (fetchError) {
+          if (fetchError.name === "AbortError") return;
+          weatherError = fetchError;
+        }
       }
+
+      if (!active) return;
+      setWeather(null);
+      setError(weatherError?.message || "Unable to load weather data");
+      setLoading(false);
     };
 
-    getLocation();
-  }, []);
+    void loadWeather();
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [retryVersion]);
 
-  if (loading) {
-    return <div>Loading weather...</div>;
-  }
+  if (loading) return <div>Loading weather…</div>;
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className="weather-container flex flex-col gap-3">
+        <div>{error}</div>
+        <button type="button" onClick={() => setRetryVersion((value) => value + 1)}>
+          Retry weather
+        </button>
+      </div>
+    );
   }
 
-  if (!weather) {
-    return <div>No weather data available.</div>;
-  }
-
-  const weatherCondition = weather.weather[0].main;
-  const sunriseTime = convertUnixToTime(weather.sys.sunrise, weather.timezone);
-  const sunsetTime = convertUnixToTime(weather.sys.sunset, weather.timezone);
+  if (!weather) return <div>No weather data available.</div>;
 
   return (
     <div className="weather-container flex flex-col gap-4">
       <div className="weather-header font-bold">Current Weather</div>
-      <div className="flex gap-4">
-        <div className="location">{weather.name}</div>
-        <div className="temperature">{Math.round(weather.main.temp)}°C</div>
-        <div className="weather-icon">
-            <WeatherIcon condition={weatherCondition} />
+      <div className="flex gap-4 items-center">
+        <div className="location">{weather.location}</div>
+        <div className="temperature">
+          {Math.round(weather.temperature)}{weather.temperatureUnit}
+        </div>
+        <div className="weather-icon" title={weather.condition} aria-label={weather.condition}>
+          {weather.icon}
         </div>
       </div>
       <div className="sunrise-sunset">
-        <div>🌅 Sunrise: {sunriseTime}</div>
-        <div>🌇 Sunset: {sunsetTime}</div>
+        <div>🌅 Sunrise: {weather.sunrise}</div>
+        <div>🌇 Sunset: {weather.sunset}</div>
       </div>
+      {notice && (
+        <div className="text-xs text-gray-500">
+          <span>{notice}</span>{" "}
+          <button
+            className="underline"
+            type="button"
+            onClick={() => setRetryVersion((value) => value + 1)}
+          >
+            Retry current location
+          </button>
+        </div>
+      )}
     </div>
   );
 };

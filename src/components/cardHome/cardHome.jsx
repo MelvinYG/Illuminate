@@ -1,4 +1,5 @@
 import './cardHome.css';
+import PropTypes from "prop-types";
 
 const CardHome = ({className, content}) => {
     return (
@@ -9,6 +10,14 @@ const CardHome = ({className, content}) => {
       </div>
     );
   }
-  
+
   export default CardHome;
-  
+
+CardHome.propTypes = {
+  className: PropTypes.string,
+  content: PropTypes.node.isRequired,
+};
+
+CardHome.defaultProps = {
+  className: "",
+};

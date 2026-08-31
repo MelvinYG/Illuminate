@@ -19,11 +19,27 @@
 .recom-box{
     display: flex;
     flex-direction: column;
-    height: 150px;
-    width: 200px;
+    gap: 8px;
+    min-height: 150px;
+    width: min(260px, 100%);
     background-color: #fefefe;
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 1rem;
     cursor: pointer;
+    text-decoration: none;
+
+    h3{
+        font-weight: 700;
+    }
+
+    time{
+        margin-top: auto;
+        color: #666;
+        font-size: 0.8rem;
+    }
+}
+
+.dark .recom-box time{
+    color: #ddd;
 }

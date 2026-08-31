@@ -8,3 +8,61 @@
         font-weight: bold;
     }
 }
+
+.notification{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.notification.unread{
+    border-left: 4px solid #ef4444;
+    background: rgba(239, 68, 68, 0.06);
+}
+
+.notification-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.notification time{
+    color: #777;
+    font-size: 0.85rem;
+}
+
+.unread-badge{
+    color: #dc2626;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.dark .notification time{
+    color: #ccc;
+}
+
+.notification-detail{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 720px;
+    margin: 48px auto;
+    padding: 32px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+}
+
+.notification-detail h2{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.notification-detail time{
+    color: #777;
+}

@@ -15,12 +15,12 @@ const Signup = () => {
         const {firstname, lastname, email, password } = Object.fromEntries(formData); 
         
         try{
-            const res = await apiRequest.post("/auth/signup", {
+            await apiRequest.post("/auth/signup", {
                 firstname, lastname, email, password
             });
             navigate('/login'); 
         }catch (err ){
-            setError(err.response.data.message);
+            setError(err.response?.data?.message || "Unable to create account");
         }
     }
 
