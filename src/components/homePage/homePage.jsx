@@ -39,17 +39,17 @@ const HomePage = () => {
         {/* Weather Card spans 2 columns on small and larger screens */}
         <CardHome
           className="card-weather col-span-6  md:col-span-3 lg:col-span-2"
-          content={WeatherForecast()}
+          content={<WeatherForecast />}
         />
 
         {/* Tariff Card spans 2 columns on small and larger screens */}
         <CardHome 
           className="col-span-6 md:col-span-3 lg:col-span-2 hover:cursor-pointer" 
-          content={TariffHome()} 
+          content={<TariffHome />}
         />
 
         {/* Empty Card to maintain the layout */}
-        <CardHome className="col-span-6 md:col-span-6 lg:col-span-4" content={Recommendation()} />
+        <CardHome className="col-span-6 md:col-span-6 lg:col-span-4" content={<Recommendation />} />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from "prop-types";
 import './loaderCompo.css'; // We'll define the CSS animation here
 
 const Loader = ({ onComplete }) => {
@@ -23,3 +24,7 @@ const Loader = ({ onComplete }) => {
 };
 
 export default Loader;
+
+Loader.propTypes = {
+  onComplete: PropTypes.func.isRequired,
+};

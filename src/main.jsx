@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { AuthContextProvider } from './context/AuthContext.jsx'
+import { installGlobalErrorLogging } from './lib/logger.js'
+
+installGlobalErrorLogging();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

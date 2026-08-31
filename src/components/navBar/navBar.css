@@ -2,6 +2,27 @@
     position: relative;
 }
 
+.notification-link{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.notification-dot{
+    position: absolute;
+    top: -4px;
+    right: -9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background-color: #ef4444;
+    box-shadow: 0 0 0 2px #fff;
+}
+
+.dark .notification-dot{
+    box-shadow: 0 0 0 2px #121212;
+}
+
 .profile-dropdown{
     position: absolute;
     top: 110%;

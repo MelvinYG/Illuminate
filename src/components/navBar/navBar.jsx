@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './navBar.css';
 import { AuthContext } from '../../context/AuthContext';
 
 const NavBar = () => {
     const [profileBtn, setProfileBtn] = useState(false);
-    const {darkMode} = useContext(AuthContext);
-    const [sideMenu, setSideMenu] = useState(false);
+    const {darkMode, unreadCount} = useContext(AuthContext);
+    const [, setSideMenu] = useState(false);
 
 const openSideMenu = () => {
     setSideMenu(prevState => {
@@ -30,10 +31,19 @@ const openSideMenu = () => {
             <img src="./logo-main.svg" className="object-contain" alt="main-logo" />
         </div>
         <div className="navbar-options flex gap-6 items-center">
-            <div className="home"><a href="/">Home</a></div>
-            <div className="analytics"><a href="/analytics">Analytics</a></div>
-            <div className="devices"><a href="/devices">Devices</a></div>
-            <div className="notifications"><a href="/notifications">Notifications</a></div>
+            <div className="home"><Link to="/home">Home</Link></div>
+            <div className="analytics"><Link to="/analytics">Analytics</Link></div>
+            <div className="devices"><Link to="/devices">Devices</Link></div>
+            <div className="notifications">
+                <Link
+                    className="notification-link"
+                    to="/notifications"
+                    aria-label={`Notifications${unreadCount ? `, ${unreadCount} unread` : ''}`}
+                >
+                    Notifications
+                    {unreadCount > 0 && <span className="notification-dot" aria-hidden="true" />}
+                </Link>
+            </div>
             <div className={`profile-btn flex gap-2 border-solid border rounded-3xl p-2 ${darkMode ? 'border-white' : 'border-black'}`} 
                 onClick={handleProfileClick}>
                 <img
@@ -48,8 +58,8 @@ const openSideMenu = () => {
                 style={{ filter: darkMode ? 'invert(1) brightness(2)' : 'none' }}
                 />
                 {profileBtn ? <div className="profile-dropdown">
-                    <div className="profile"><a href="/profile">Profile</a></div>
-                    <div className="settings"><a href="/settings">Settings</a></div>
+                    <div className="profile"><Link to="/profile">Profile</Link></div>
+                    <div className="settings"><Link to="/settings">Settings</Link></div>
                 </div> : <></>}
             </div>
         </div>
@@ -65,12 +75,21 @@ const openSideMenu = () => {
                 <img src="./close.png" alt="closeBtn" 
                 style={{ filter: darkMode ? 'invert(1) brightness(2)' : 'none' }}/>
             </div>
-            <div className="home"><a href="/">Home</a></div>
-            <div className="analytics"><a href="/analytics">Analytics</a></div>
-            <div className="devices"><a href="/devices">Devices</a></div>
-            <div className="notifications"><a href="/notifications">Notifications</a></div>
-            <div className="profile"><a href="/profile">Profile</a></div>
-            <div className="settings"><a href="/settings">Settings</a></div>
+            <div className="home"><Link to="/home">Home</Link></div>
+            <div className="analytics"><Link to="/analytics">Analytics</Link></div>
+            <div className="devices"><Link to="/devices">Devices</Link></div>
+            <div className="notifications">
+                <Link
+                    className="notification-link"
+                    to="/notifications"
+                    aria-label={`Notifications${unreadCount ? `, ${unreadCount} unread` : ''}`}
+                >
+                    Notifications
+                    {unreadCount > 0 && <span className="notification-dot" aria-hidden="true" />}
+                </Link>
+            </div>
+            <div className="profile"><Link to="/profile">Profile</Link></div>
+            <div className="settings"><Link to="/settings">Settings</Link></div>
         </div>
     </div>
   )
